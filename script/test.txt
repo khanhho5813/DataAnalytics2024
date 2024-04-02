@@ -2,7 +2,7 @@ Test, test, test
 Another testy
 1
 2
-3
+3 Line 3 modified
 4
 5
 6
