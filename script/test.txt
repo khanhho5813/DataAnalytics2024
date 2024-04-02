@@ -13,8 +13,4 @@ New content for line 2
 7 la;ksjhf alskdj lasldfkh 
 8
 9
-<<<<<<< HEAD
-10 this is Juan, Abi, David
-=======
-10 this is Juan, Abi2
->>>>>>> 0b7e3bb94cb4fe4e211e4177c7bf90464b03546e
+10 this is Juan, Abi, David, Stephen
