@@ -92,57 +92,60 @@ def convert_excel_to_csv_same_path(excel_file_path):
     print(f"CSV file saved at: {csv_file_path}")
 
 ENCODING = 'utf-8'
-path_directory = '../Data/GRF17'
+x = {'../Data/GRF17'
+     ,'../data/2017-18-crdc-data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV'
+     ,'../data/2017-18-crdc-data/2017-18 Public-Use Files/Data/LEA/CRDC/CSV'}
 
-excel_files = True
-if excel_files: 
-    xlsx_files = find_files(path_directory, excel_files)
+for path_directory in x:
+    excel_files = True
+    if excel_files: 
+        xlsx_files = find_files(path_directory, excel_files)
 
-    for file_xlsx in xlsx_files:
-    # Example usage
-        convert_excel_to_csv_same_path(file_xlsx)
-    
-    excel_files = False
+        for file_xlsx in xlsx_files:
+        # Example usage
+            convert_excel_to_csv_same_path(file_xlsx)
+        
+        excel_files = False
 
 
-#CSV files at path_directory
-csv_files = find_files(path_directory, excel_files)
+    #CSV files at path_directory
+    csv_files = find_files(path_directory, excel_files)
 
-header = []  # To store the header
-first_three_rows = []  # To store the first three rows
+    header = []  # To store the header
+    first_three_rows = []  # To store the first three rows
 
-#This is to write the tables in a txt file
-# table_postgreSQL = open('C:/Users/Public/EDFacts/tables_SQL.txt', "w")
+    #This is to write the tables in a txt file
+    # table_postgreSQL = open('C:/Users/Public/EDFacts/tables_SQL.txt', "w")
 
-#Create the tables and copy commands 
-with open(path_directory + "/copy_commands.sql", 'w', encoding='utf-8') as copy_commands_file:
-    for file_csv in csv_files:
+    #Create the tables and copy commands 
+    with open(path_directory + "/copy_commands.sql", 'x', encoding='utf-8') as copy_commands_file:
+        for file_csv in csv_files:
 
-        # Generate the table name based on the file name
-        table_name = os.path.splitext(os.path.basename(file_csv))[0].replace('-', ' ')
-        table_name = table_name.replace(' ', '')
-        table_name = '"DataAnalytics"' + "." + table_name
+            # Generate the table name based on the file name
+            table_name = os.path.splitext(os.path.basename(file_csv))[0].replace('-', ' ')
+            table_name = table_name.replace(' ', '')
+            table_name = '"DataAnalytics"' + "." + table_name
 
-        print(table_name)
-        max_lengths = find_max_char_lengths(file_csv)
+            print(table_name)
+            max_lengths = find_max_char_lengths(file_csv)
 
-        # Generate the DDL statement for the table
-        ddl = generate_ddl(table_name, list(max_lengths.keys()), max_lengths)
+            # Generate the DDL statement for the table
+            ddl = generate_ddl(table_name, list(max_lengths.keys()), max_lengths)
 
-                
-        # Assuming `table_postgreSQL` is your opened file for writing DDL statements
-        copy_commands_file.write(ddl + "\n")
+                    
+            # Assuming `table_postgreSQL` is your opened file for writing DDL statements
+            copy_commands_file.write(ddl + "\n")
 
-        # Pre-process the file path to escape backslashes
+            # Pre-process the file path to escape backslashes
 
-        #To use the files without the last empty line
-        file_csv_cleaned = clean_file_and_save_copy(file_csv)
-        file_csv_escaped = file_csv_cleaned.replace('\\', '/')
+            #To use the files without the last empty line
+            file_csv_cleaned = clean_file_and_save_copy(file_csv)
+            file_csv_escaped = file_csv_cleaned.replace('\\', '/')
 
-        # Format the COPY command for the current file using the pre-processed path
-        copy_command = f"COPY {table_name} FROM '{file_csv_escaped}' DELIMITER ',' CSV HEADER ENCODING 'windows-1251';\n"
+            # Format the COPY command for the current file using the pre-processed path
+            copy_command = f"COPY {table_name} FROM '{file_csv_escaped}' DELIMITER ',' CSV HEADER ENCODING 'windows-1251';\n"
 
-        # Write the COPY command to the file
-        copy_commands_file.write(copy_command)
+            # Write the COPY command to the file
+            copy_commands_file.write(copy_command)
 
 
