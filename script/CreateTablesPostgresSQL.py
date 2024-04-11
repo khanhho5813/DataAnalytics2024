@@ -2,6 +2,26 @@ import os
 import glob
 import csv
 import pandas as pd
+import psycopg2
+
+# TODO: generatge pip file. Add install openpyxl
+
+# Function to execute an SQL file
+def execute_sql_file(filename, connection):
+    # Open and read the SQL file
+    with open(filename, 'r') as file:
+        sql_content = file.read()
+
+    # Execute the SQL commands
+    try:
+        cursor = connection.cursor()
+        cursor.execute(sql_content)
+        connection.commit()  # Commit the transaction
+        print(f"Successfully executed {filename}")
+    except Exception as e:
+        print(f"Error executing {filename}: {e}")
+    finally:
+        cursor.close()
 
 def generate_ddl(table_name, column_names, max_lengths):
     """Generate a DDL statement for creating a SQL table with all columns as VARCHAR."""
@@ -85,6 +105,10 @@ def convert_excel_to_csv_same_path(excel_file_path):
 
 ENCODING = 'utf-8'
 
+# Retrieve the PostgreSQL_PWD environment variable
+postgresql_pwd = os.getenv('PostgreSQL_PWD')
+
+
 # All directories that will be imported to SQL
 all_path_directories = ['../data/GRF17'
     ,'../data/2017-18-crdc-data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV'
@@ -105,7 +129,7 @@ output_sql_name = ['GRF17'
                   ,'ussd17']
 
 #Change it according with the files that you have in each directory 
-excel_files_exist = [False, #If first time, put TRUE (GRF17)
+excel_files_exist = [True, #If first time, put TRUE (GRF17)
                      False,
                      False, 
                      False,
@@ -150,7 +174,7 @@ for path_directory in all_path_directories:
 
     # Create the file with initial SCHEMA command
     with open("../SQL/"+output_sql_name[file_number]+".sql", 'x', encoding=ENCODING) as copy_commands_file:
-        copy_commands_file.write('CREATE SCHEMA IF NOT EXISTS "DataAnalytics"; \n')
+        copy_commands_file.write('CREATE SCHEMA IF NOT EXISTS "CRDB"; \n')
 
     #Create the tables and copy commands 
     with open("../SQL/"+output_sql_name[file_number]+".sql", 'a', encoding=ENCODING) as copy_commands_file:
@@ -161,7 +185,7 @@ for path_directory in all_path_directories:
             table_name = table_name.replace('(', '')
             table_name = table_name.replace(')', '')
             table_name = table_name.replace(' ', '')
-            table_name = '"DataAnalytics"' + "." + table_name
+            table_name = '"CRDB"' + "." + table_name
 
             print(table_name)
             max_lengths = find_max_char_lengths(file_csv)
@@ -184,4 +208,21 @@ for path_directory in all_path_directories:
             # Write the COPY command to the file
             copy_commands_file.write(copy_command)
     file_number=file_number+1
-    
+
+
+
+# Connect to the PostgreSQL database
+connection = psycopg2.connect(
+    dbname='CRDB',
+    user='postgres',
+    password=postgresql_pwd,
+    host='127.0.0.1'
+)
+
+# List all files in the specified folder
+for filename in os.listdir('../SQL'):
+    if filename.endswith('.sql'):
+        # Construct the full path to the file
+        full_path = os.path.join('../SQL', filename)
+        # Execute the SQL file
+        execute_sql_file(full_path, connection)
