@@ -3,8 +3,26 @@ import glob
 import csv
 import pandas as pd
 import psycopg2
+import subprocess
 
-# TODO: generatge pip file. Add install openpyxl
+def install_packages_from_requirements(file_path):
+    """
+    Install or reinstall packages from a requirements.txt file using pip.
+    This forces a reinstall to the specific versions listed in the file.
+    
+    Requirements file came from the command: pip freeze > requirements_dataAnalytics.txt
+    Args:
+        file_path (str): The path to the requirements.txt file.
+    """
+    try:
+        # Execute pip install with the --force-reinstall option
+        subprocess.run(['pip', 'install', '-r', file_path], check=True)
+        print("All packages have been installed or reinstalled to match the versions specified.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while installing packages: {e}")
+
+# install and verify the packages
+install_packages_from_requirements('../requirements_dataAnalytics.txt')
 
 # Function to execute an SQL file
 def execute_sql_file(filename, connection):
@@ -97,8 +115,13 @@ def convert_excel_to_csv_same_path(excel_file_path):
     try:
         df = pd.read_excel(excel_file_path, engine='openpyxl')
     except:
-        df = pd.read_excel(excel_file_path) #Missing optional dependency 'xlrd'. Install xlrd >= 2.0.1 for xls Excel support Use pip or conda to install xlrd.
+        df = pd.read_excel(excel_file_path) 
+        if(base_filename_without_ext == 'ussd17'):
+            df.columns = ["state", "state_FIPS","DistrictID", "NameSchoolDistrict","TotalPopulation", "Population5_17","Population5_17InPoverty"]
+            df = df.drop([df.index[0], df.index[1]])
+            csv_file_path = os.path.join(directory, f"{base_filename_without_ext}_edited.csv")
 
+            
     # Save the DataFrame to a CSV file
     df.to_csv(csv_file_path, index=False, quoting=csv.QUOTE_ALL)
     print(f"CSV file saved at: {csv_file_path}")
