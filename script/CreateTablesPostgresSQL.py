@@ -1,9 +1,3 @@
-import os
-import glob
-import csv
-import pandas as pd
-import psycopg2
-import subprocess
 
 def install_packages_from_requirements(file_path):
     """
@@ -20,9 +14,6 @@ def install_packages_from_requirements(file_path):
         print("All packages have been installed or reinstalled to match the versions specified.")
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while installing packages: {e}")
-
-# install and verify the packages
-install_packages_from_requirements('../requirements_dataAnalytics.txt')
 
 # Function to execute an SQL file
 def execute_sql_file(filename, connection):
@@ -125,6 +116,19 @@ def convert_excel_to_csv_same_path(excel_file_path):
     # Save the DataFrame to a CSV file
     df.to_csv(csv_file_path, index=False, quoting=csv.QUOTE_ALL)
     print(f"CSV file saved at: {csv_file_path}")
+
+
+# install and verify the packages
+install_packages_from_requirements('../requirements_dataAnalytics.txt')
+
+
+### Libraries
+import os
+import glob
+import csv
+import pandas as pd
+import psycopg2
+import subprocess
 
 ENCODING = 'utf-8'
 
