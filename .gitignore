@@ -1,2 +1,4 @@
 # Ignore everything in the data directory
 data/*
+# Ignore the local configuraiton for Visual Studio Code
+.vscode/*
