@@ -1,0 +1,31 @@
+CREATE SCHEMA IF NOT EXISTS "CRDB"; 
+CREATE TABLE IF NOT EXISTS "CRDB".EDGE_GEOCODE_PUBLICLEA_1718 (
+    leaid VARCHAR(7),
+    name VARCHAR(60),
+    opstfips VARCHAR(2),
+    street VARCHAR(59),
+    city VARCHAR(26),
+    state VARCHAR(2),
+    zip VARCHAR(5),
+    stfip VARCHAR(2),
+    cnty VARCHAR(5),
+    nmcnty VARCHAR(33),
+    lat VARCHAR(18),
+    lon VARCHAR(19),
+    cbsa VARCHAR(5),
+    nmcbsa VARCHAR(46),
+    cbsatype VARCHAR(1),
+    csa VARCHAR(3),
+    nmcsa VARCHAR(58),
+    necta VARCHAR(5),
+    nmnecta VARCHAR(40),
+    cd VARCHAR(4),
+    sldl VARCHAR(5),
+    sldu VARCHAR(5),
+    schoolyear VARCHAR(9),
+    locale VARCHAR(2),
+    loc_other VARCHAR(5),
+    loc_count VARCHAR(2),
+    loc_sch VARCHAR(38)
+);
+COPY "CRDB".EDGE_GEOCODE_PUBLICLEA_1718 FROM '/Users/abigailiovino/Documents/GitHub/DataAnalytics2024/data/EDGE_GEOCODE_PUBLICLEA_1718/cleaned_EDGE_GEOCODE_PUBLICLEA_1718.csv' DELIMITER ',' CSV HEADER ENCODING 'windows-1251';
