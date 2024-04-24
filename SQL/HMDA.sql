@@ -79,4 +79,4 @@ CREATE TABLE IF NOT EXISTS "CRDB".hmda_2017_nationwide_allrecords_labels (
     number_of_1_to_4_family_units VARCHAR(5),
     application_date_indicator VARCHAR(2)
 );
-COPY "CRDB".hmda_2017_nationwide_allrecords_labels FROM '/Users/abigailiovino/Documents/GitHub/DataAnalytics2024/data/hmda/cleaned_hmda_2017_nationwide_all-records_labels.csv' DELIMITER ',' CSV HEADER ENCODING 'windows-1251';
+COPY "CRDB".hmda_2017_nationwide_allrecords_labels FROM '/Users/abigailiovino/Documents/GitHub/DataAnalytics2024/data/hmda_2017_nationwide_all-records_labels/cleaned_hmda_2017_nationwide_all-records_labels.csv' DELIMITER ',' CSV HEADER ENCODING 'windows-1251';
