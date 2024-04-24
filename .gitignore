@@ -2,3 +2,5 @@
 data/*
 # Ignore the local configuraiton for Visual Studio Code
 .vscode/*
+# Ignore the mac desktop file
+.DS_Store
