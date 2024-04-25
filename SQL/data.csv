@@ -1,0 +1,26 @@
+applicant_ethnicity_name,applicant_race_name_1,loan,income,spread,total
+Hispanic or Latino,American Indian or Alaska Native,188.37057735606305,80.51844350598984,2.426126033057851,24880
+Hispanic or Latino,Asian,271.5631369073992,109.09503464203233,2.2822807017543854,9029
+Hispanic or Latino,Black or African American,187.6063004781613,80.8717794054287,2.1369611576542265,24887
+Hispanic or Latino,"Information not provided by applicant in mail, Internet, or telephone application",181.65887816611604,80.41763745759457,3.539829474062108,138065
+Hispanic or Latino,Native Hawaiian or Other Pacific Islander,189.43370138267184,80.26657574485942,2.403871681415929,10053
+Hispanic or Latino,White,208.0037222230535,97.3593777946597,2.2405696549205634,1136392
+"Information not provided by applicant in mail, Internet, or telephone application",American Indian or Alaska Native,150.25561747258672,84.53582202111613,4.8090617283950605,5563
+"Information not provided by applicant in mail, Internet, or telephone application",Asian,340.1714325374792,138.79652837798906,3.358388429752066,14408
+"Information not provided by applicant in mail, Internet, or telephone application",Black or African American,138.9199293829551,68.9701726844584,4.611218861209958,35119
+"Information not provided by applicant in mail, Internet, or telephone application","Information not provided by applicant in mail, Internet, or telephone application",258.77709150363313,127.50606420776012,2.5317214191852835,1343151
+"Information not provided by applicant in mail, Internet, or telephone application",Native Hawaiian or Other Pacific Islander,250.0299580587178,99.49426751592357,3.677407407407407,1669
+"Information not provided by applicant in mail, Internet, or telephone application",White,199.9324041569636,104.20504031529089,4.4450747252747265,143860
+Not applicable,American Indian or Alaska Native,207.53531598513013,98.55648535564853,2.26,269
+Not applicable,Asian,323.92105263157896,126.67474048442907,2.686666666666666,304
+Not applicable,Black or African American,180.76625659050967,83.54275092936803,1.9395833333333332,569
+Not applicable,"Information not provided by applicant in mail, Internet, or telephone application",220.18332543818096,101.40139709833423,2.1574358974358976,2111
+Not applicable,Native Hawaiian or Other Pacific Islander,373.53333333333336,102.27586206896552,3.38,75
+Not applicable,Not applicable,384.0272224020505,103.28407528768923,3.589142857142858,1513818
+Not applicable,White,197.13810975609755,219.71470207253887,2.808831168831169,3316
+Not Hispanic or Latino,American Indian or Alaska Native,180.1229142364457,89.93981688102676,2.825370869858397,78876
+Not Hispanic or Latino,Asian,353.2255451862583,140.9025905453983,2.2743217410484613,668318
+Not Hispanic or Latino,Black or African American,190.96015662159408,87.20851885572456,2.2796367455026836,941981
+Not Hispanic or Latino,"Information not provided by applicant in mail, Internet, or telephone application",261.58637640894875,116.0819151239202,2.3846011560693654,157695
+Not Hispanic or Latino,Native Hawaiian or Other Pacific Islander,272.87331907414074,117.45625983367049,2.2409700063816196,47230
+Not Hispanic or Latino,White,227.25059817711056,116.84859766740095,2.4713327177593354,7983858
