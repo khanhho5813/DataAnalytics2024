@@ -1,5 +1,4 @@
 import subprocess
-import re
 
 def install_packages_from_requirements(file_path):
     """
@@ -23,9 +22,6 @@ def execute_sql_file(filename, connection):
     # Open and read the SQL file
     with open(filename, 'r') as file:
         sql_content = file.read()
-    
-    # Print the SQL content for debugging
-    print("SQL File Contents:\n", sql_content)
 
     # Execute the SQL commands
     try:
@@ -49,18 +45,13 @@ def generate_ddl(table_name, column_names, max_lengths):
         column_definitions.append(column_def)
     ddl += ",\n".join(column_definitions)
     ddl += "\n);"
-    
-    # Print DDL to debug
-    print("Generated DDL:", ddl)
     return ddl
 
 def clean_file_and_save_copy(file_path):
-    """
-    Reads a file line by line, removes lines that are empty or contain only spaces,
-    and saves a cleaned copy. Then, loads this cleaned copy to clean column names and save again.
-    """
+    """Reads a file, removes lines that are empty or contain only spaces, and saves a cleaned copy."""
     file_path = os.path.abspath(file_path)
     cleaned_lines = []  # List to hold cleaned lines
+    
     with open(file_path, 'r', encoding='cp1252') as file:
         for line in file:
             # Check if line is not empty or doesn't contain only spaces
@@ -71,11 +62,11 @@ def clean_file_and_save_copy(file_path):
     directory, filename = os.path.split(file_path)
     cleaned_file_path = os.path.join(directory, f"cleaned_{filename}")
     
-    # Write the cleaned lines to the intermediate new file
+    # Write the cleaned lines to the new file
     with open(cleaned_file_path, 'w', encoding='utf-8') as cleaned_file:
         cleaned_file.writelines(cleaned_lines)
-
-    return cleaned_file_path
+    
+    return(cleaned_file_path)
 
 def find_files(path_directory, flag_xlsx):
     # Search for CSV files in current directory and all subdirectories
@@ -85,9 +76,8 @@ def find_files(path_directory, flag_xlsx):
             list_files = glob.glob(os.path.join(path_directory, '', '*.xls'), recursive=True)
     else:
         list_files = glob.glob(os.path.join(path_directory, '', '*.csv'), recursive=True)
-    # Filter out temporary Excel files created by MS Office
+     # Filter out temporary Excel files created by MS Office
     list_files = [file for file in list_files if not os.path.basename(file).startswith('~$')]
-    print("FIND FILES",flag_xlsx, list_files)
     return list_files
 
 def find_max_char_lengths(csv_file_path):
@@ -107,49 +97,41 @@ def find_max_char_lengths(csv_file_path):
                 
     return max_lengths
 
-def clean_column_name(column_name):
-    """
-    Clean column names to ensure they are valid SQL identifiers.
-    """
-    cleaned_name = re.sub(r'\W+', '_', column_name).strip('_').lower()
-    return cleaned_name if cleaned_name else 'invalid_column_name'
-
 def convert_excel_to_csv_same_path(excel_file_path):
     # Extract directory and base filename without extension
     directory, base_filename = os.path.split(excel_file_path)
     base_filename_without_ext, extension = os.path.splitext(base_filename)
-    print("BASE file", base_filename)
+    print("basefilename", base_filename)
     
     # Construct the CSV file path
     csv_file_path = os.path.join(directory, f"{base_filename_without_ext}.csv")
     
+    # Determine the correct engine based on file extension
+    if extension.lower() == '.xls':
+        engine = 'xlrd'
+    elif extension.lower() == '.xlsx':
+        engine = 'openpyxl'
+    else:
+        raise ValueError("Unsupported file format")
+
+    
     # Read the Excel file
     if(base_filename_without_ext == 'ussd17'):
             header_row_index = 2
-            df = pd.read_excel(excel_file_path, header=header_row_index)
-            #df.columns = ["state", "state_FIPS","DistrictID", "NameSchoolDistrict","TotalPopulation", "Population5_17","Population5_17InPoverty"]
+            df = pd.read_excel(excel_file_path,  engine=engine, header=header_row_index)
+            df.columns = ["state", "state_FIPS","DistrictID", "NameSchoolDistrict","TotalPopulation", "Population5_17","Population5_17InPoverty"]
             #df = df.drop([df.index[0], df.index[1]])
             csv_file_path = os.path.join(directory, f"{base_filename_without_ext}_edited.csv")
             
     else:
-        df = pd.read_excel(excel_file_path)
+        df = pd.read_excel(excel_file_path, engine=engine)
+
         
-    df.columns = [clean_column_name(col) for col in df.columns]  # Clean column names
-        
+            
     # Save the DataFrame to a CSV file
-    
     df.to_csv(csv_file_path, index=False, quoting=csv.QUOTE_ALL)
     print(f"CSV file saved at: {csv_file_path}")
 
-def convert_txt_to_csv(txt_file_path):
-    csv_file_path = txt_file_path.replace('.txt', '.csv')
-    with open(txt_file_path, 'r', encoding='utf-8') as txt_file, \
-         open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
-        reader = csv.reader(txt_file, delimiter='|')
-        writer = csv.writer(csv_file)
-        for row in reader:
-            writer.writerow(row)
-    return csv_file_path
 
 # install and verify the packages
 install_packages_from_requirements('../requirements_dataAnalytics.txt')
@@ -171,7 +153,7 @@ all_path_directories = ['../data/GRF17'
     ,'../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV'
     ,'../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV'
     ,'../data/2017-18 Public-Use Files/Data/LEA/CRDC/CSV'
-    ,'../data/hmda'
+    ,'../data/hmda_2017_nationwide_all-records_labels'
     ,'../data/EDGE_GEOCODE_PUBLICLEA_1718'
     ,'../data/ussd17']
 
@@ -190,9 +172,9 @@ excel_files_exist = [False, #If first time, put TRUE (GRF17)
                      True,
                      True, 
                      True,
-                     False,
-                     False, 
-                     False] #If first time, put TRUE (ussd17)
+                     True,
+                     True, 
+                     True] #If first time, put TRUE (ussd17)
 
 file_number = 0
 for path_directory in all_path_directories:

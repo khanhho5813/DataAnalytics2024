@@ -1,0 +1,167 @@
+Script started on Tue Apr 23 21:25:07 2024
+Command: python CreateTablesPostgresSQL.py
+Requirement already satisfied: et-xmlfile==1.1.0 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 1)) (1.1.0)
+Requirement already satisfied: numpy==1.26.4 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 2)) (1.26.4)
+Requirement already satisfied: openpyxl==3.1.2 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 3)) (3.1.2)
+Requirement already satisfied: pandas==2.2.2 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 4)) (2.2.2)
+Requirement already satisfied: psycopg2==2.9.9 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 5)) (2.9.9)
+Requirement already satisfied: python-dateutil==2.9.0.post0 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 6)) (2.9.0.post0)
+Requirement already satisfied: pytz==2024.1 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 7)) (2024.1)
+Requirement already satisfied: six==1.16.0 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 8)) (1.16.0)
+Requirement already satisfied: tzdata==2024.1 in /Users/abigailiovino/penv/venn/lib/python3.11/site-packages (from -r ../requirements_dataAnalytics.txt (line 9)) (2024.1)
+All packages have been installed or reinstalled to match the versions specified.
+Deleted file: ../data/GRF17/cleaned_grf17_lea_county.csv
+Deleted file: ../data/GRF17/cleaned_grf17_lea_blkgrp.csv
+Deleted file: ../data/GRF17/cleaned_grf17_lea_place.csv
+Deleted file: ../data/GRF17/cleaned_grf17_lea_tract.csv
+ 
+Current File >> 
+../SQL/GRF17.sql
+"CRDB".grf17_lea_tract
+"CRDB".grf17_lea_place
+"CRDB".grf17_lea_county
+"CRDB".grf17_lea_blkgrp
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Credit Recovery.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_International Baccalaureate.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_SAT and ACT.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Algebra II.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_School Support.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Justice Facilities.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Geometry.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Algebra I.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Physics.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_School Characteristics.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Single-sex Athletics.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Offenses.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Harassment and Bullying.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Single-sex Classes.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Restraint and Seclusion.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Dual Enrollment.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Corporal Punishment.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Advanced Placement.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Chemistry.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Retention.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Transfers.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Enrollment.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Suspensions.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Calculus.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Expulsions.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Advanced Mathematics.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_School Expenditures.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Biology.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/CRDC/CSV/cleaned_Gifted and Talented.csv
+[]
+ 
+Current File >> 
+../SQL/CRDC_SCH.sql
+"CRDB".SchoolSupport
+"CRDB".AlgebraII
+"CRDB".Geometry
+"CRDB".CorporalPunishment
+"CRDB".Biology
+"CRDB".AdvancedMathematics
+"CRDB".JusticeFacilities
+"CRDB".SchoolExpenditures
+"CRDB".DualEnrollment
+"CRDB".AlgebraI
+"CRDB".SATandACT
+"CRDB".GiftedandTalented
+"CRDB".InternationalBaccalaureate
+"CRDB".Chemistry
+"CRDB".Calculus
+"CRDB".Transfers
+"CRDB".Retention
+"CRDB".Suspensions
+"CRDB".Physics
+"CRDB".AdvancedPlacement
+"CRDB".SchoolCharacteristics
+"CRDB".Offenses
+"CRDB".SinglesexAthletics
+"CRDB".Expulsions
+"CRDB".SinglesexClasses
+"CRDB".RestraintandSeclusion
+"CRDB".CreditRecovery
+"CRDB".HarassmentandBullying
+"CRDB".Enrollment
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_MISSING.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_AUT.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Educational Environment by Gender by Disability.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Placement.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_DB.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_SLI.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_DD.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 22 SCH - Title I Status.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_HI.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 814 SCH - Chronic Absenteeism.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_SLD.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_OHI.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_MD.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_MR.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_EMN.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_VI.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_OI.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/SCH/EDFacts/CSV/cleaned_ID 74 SCH - Race by Sex by Disability plus LEP_TBI.csv
+[]
+ 
+Current File >> 
+../SQL/CRDC_SCH_EDFacts.sql
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_SLI
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_VI
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_OI
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_MD
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_MR
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_AUT
+"CRDB".ID74SCHEducationalEnvironmentbyGenderbyDisability
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_HI
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_DD
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_TBI
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_DB
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_EMN
+"CRDB".ID814SCHChronicAbsenteeism
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_OHI
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_MISSING
+"CRDB".ID74SCHRacebySexbyDisabilityplusLEP_SLD
+"CRDB".ID74SCHRacebyPlacement
+"CRDB".ID22SCHTitleIStatus
+Deleted file: ../data/2017-18 Public-Use Files/Data/LEA/CRDC/CSV/cleaned_Distance Education.csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/LEA/CRDC/CSV/cleaned_High School Equivalency (GED).csv
+Deleted file: ../data/2017-18 Public-Use Files/Data/LEA/CRDC/CSV/cleaned_LEA Characteristics.csv
+[]
+ 
+Current File >> 
+../SQL/CRDC_LEA.sql
+"CRDB".LEACharacteristics
+"CRDB".DistanceEducation
+"CRDB".HighSchoolEquivalencyGED
+Deleted file: ../data/hmda_2017_nationwide_all-records_labels/cleaned_hmda_2017_nationwide_all-records_labels.csv
+[]
+ 
+Current File >> 
+../SQL/HMDA.sql
+"CRDB".hmda_2017_nationwide_allrecords_labels
+Deleted file: ../data/EDGE_GEOCODE_PUBLICLEA_1718/cleaned_EDGE_GEOCODE_PUBLICLEA_1718.csv
+['../data/EDGE_GEOCODE_PUBLICLEA_1718/EDGE_GEOCODE_PUBLICLEA_1718.xlsx']
+basefilename EDGE_GEOCODE_PUBLICLEA_1718.xlsx
+CSV file saved at: ../data/EDGE_GEOCODE_PUBLICLEA_1718/EDGE_GEOCODE_PUBLICLEA_1718.csv
+ 
+Current File >> 
+../SQL/GEOCODE.sql
+"CRDB".EDGE_GEOCODE_PUBLICLEA_1718
+Deleted file: ../data/ussd17/cleaned_ussd17_edited.csv
+['../data/ussd17/ussd17.xls']
+basefilename ussd17.xls
+CSV file saved at: ../data/ussd17/ussd17_edited.csv
+ 
+Current File >> 
+../SQL/ussd17.sql
+"CRDB".ussd17_edited
+Successfully executed ../SQL/ussd17.sql
+Successfully executed ../SQL/CRDC_SCH.sql
+Successfully executed ../SQL/GRF17.sql
+Successfully executed ../SQL/GEOCODE.sql
+Successfully executed ../SQL/HMDA.sql
+Successfully executed ../SQL/CRDC_SCH_EDFacts.sql
+Successfully executed ../SQL/CRDC_LEA.sql
+
+Command exit status: 0
+Script done on Tue Apr 23 21:40:25 2024

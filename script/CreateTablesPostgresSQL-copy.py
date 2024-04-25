@@ -25,7 +25,7 @@ def execute_sql_file(filename, connection):
         sql_content = file.read()
     
     # Print the SQL content for debugging
-    print("SQL File Contents:\n", sql_content)
+    print("SQL File Contents:\n", sql_content[:80])
 
     # Execute the SQL commands
     try:
@@ -51,7 +51,7 @@ def generate_ddl(table_name, column_names, max_lengths):
     ddl += "\n);"
     
     # Print DDL to debug
-    print("Generated DDL:", ddl)
+    print("Generated DDL:", ddl[:80])
     return ddl
 
 def clean_file_and_save_copy(file_path):
@@ -87,7 +87,7 @@ def find_files(path_directory, flag_xlsx):
         list_files = glob.glob(os.path.join(path_directory, '', '*.csv'), recursive=True)
     # Filter out temporary Excel files created by MS Office
     list_files = [file for file in list_files if not os.path.basename(file).startswith('~$')]
-    print("FIND FILES",flag_xlsx, list_files)
+    #print("FIND FILES",flag_xlsx, list_files)
     return list_files
 
 def find_max_char_lengths(csv_file_path):
@@ -114,6 +114,15 @@ def clean_column_name(column_name):
     cleaned_name = re.sub(r'\W+', '_', column_name).strip('_').lower()
     return cleaned_name if cleaned_name else 'invalid_column_name'
 
+def clean_table_name(file_name):
+    """Convert filenames to valid SQL table names."""
+    # Remove invalid characters and replace spaces and dashes with underscores
+    table_name = re.sub(r'[^\w\s]', '', file_name)  # Remove all non-word characters
+    table_name = re.sub(r'\s+', '_', table_name)  # Replace all whitespace types with underscores
+    table_name = re.sub(r'-', '_', table_name)  # Replace dashes with underscores
+    return table_name.lower()  # Convert to lower case to maintain consistency
+
+
 def convert_excel_to_csv_same_path(excel_file_path):
     # Extract directory and base filename without extension
     directory, base_filename = os.path.split(excel_file_path)
@@ -132,7 +141,7 @@ def convert_excel_to_csv_same_path(excel_file_path):
             csv_file_path = os.path.join(directory, f"{base_filename_without_ext}_edited.csv")
             
     else:
-        df = pd.read_excel(excel_file_path)
+        df = pd.read_excel(excel_file_path, engine='openpyxl')
         
     df.columns = [clean_column_name(col) for col in df.columns]  # Clean column names
         
